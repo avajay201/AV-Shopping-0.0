@@ -1,0 +1,413 @@
+{% extends 'shop/basic.html' %}
+
+{% block style %}
+
+.plus-minus-input {
+-webkit-align-items: center;
+-ms-flex-align: center;
+align-items: center;
+}
+
+.plus-minus-input .input-group-field {
+text-align: center;
+margin-left: 0.5rem;
+margin-right: 0.5rem;
+padding: 1rem;
+}
+
+.plus-minus-input .input-group-field::-webkit-inner-spin-button,
+.plus-minus-input .input-group-field ::-webkit-outer-spin-button {
+-webkit-appearance: none;
+appearance: none;
+}
+
+.plus-minus-input .input-group-button .circle {
+border-radius: 50%;
+padding: 0.25em 0.8em;
+}
+
+.product_section .heading_container{
+margin-bottom: 0px;
+}
+
+.center-wrapper {
+padding: 0.5rem;
+display: -webkit-box;
+display: -ms-flexbox;
+display: flex;
+-webkit-box-orient: vertical;
+-webkit-box-direction: normal;
+-ms-flex-direction: column;
+flex-direction: column;
+-webkit-box-pack: center;
+-ms-flex-pack: center;
+justify-content: center;
+min-height: 100%;
+}
+
+.content {
+margin: 0 auto;
+max-width: 600px;
+background: white;
+}
+
+
+.content {
+margin: 0 auto;
+max-width: 600px;
+}
+
+button {
+text-transform: uppercase;
+}
+
+button {
+cursor: pointer;
+width: 100px;
+background: none;
+border-radius: 4px;
+}
+
+.subtotal,
+.delivery,
+.total,
+.promo-code {
+display: -webkit-box;
+display: -ms-flexbox;
+display: flex;
+-webkit-box-pack: justify;
+-ms-flex-pack: justify;
+justify-content: space-between;
+}
+
+
+
+.total {
+margin-bottom: 1rem;
+margin-top: 1rem;
+}
+
+input[type="text"] {
+width: calc(100% - 100px - 1rem);
+padding: 0.5rem;
+}
+
+.sub_total{
+margin: 0px;
+font-size: 25px;
+font-weight: bold;
+}
+
+.amt{
+font-size: 20px;
+margin-right: 3px;
+}
+.ttl_amt{
+font-size: 25px;
+margin-top: 6px;
+font-weight: bold;
+}
+
+.ttl{
+font-size: 35px;
+font-weight: bold;
+}
+
+#buy_btn{
+width: 115px;
+background-color: #db8e8e;
+}
+
+#remove_item{
+width: 139px;
+background-color: #db8e8e;
+}
+.total{
+margin-bottom: 0px;
+margin-top: 0px;
+}
+
+input#qty_value{
+padding-right: 10px;
+padding-left: 10px;
+}
+{% endblock style %}
+{% block body %}
+<section class="product_section layout_padding">
+    <div class="container">
+        <div class="row">
+            <div class="heading_container heading_center">
+                <h2>
+                    <span>Cart</span>
+                </h2>
+            </div>
+            {% for product in cart_items %}
+            <div class="col-sm-6 col-md-4 col-lg-4">
+                <div class="box">
+                    <div class="img-box">
+                        <img src="/media/{{product.product.image}}" alt="">
+                    </div>
+                    <div class="detail-box">
+                        <h5 id="name">
+                            {{product.product.name|slice:"0:15"}}
+                        </h5>
+                        <p hidden>{{product.product.name}}</p>
+                        <h6>
+                            Rs. <span>{{product.product.price}}</span>
+                        </h6>
+                    </div>
+                    <div class="text-center">
+                        <!-- <h6 align="center">
+                            <b style="color: rgb(0, 27, 80);">{{product.product.discount}}% off</b>
+                        </h6> -->
+                        <!-- Change the `data-field` of buttons and `name` of input field's for multiple plus minus buttons-->
+                        <div class="input-group plus-minus-input" data-id="{{product.product.id}}">
+                            <div class="input-group-button">
+                                <button type="button" class="button hollow circle update_cart_qty" data-quantity="minus"
+                                    data-field="quantity">
+                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <input class="input-group-field form-control" type="number" id="qty_value" name="quantity"
+                                value="{{product.qty}}">
+                            <div class="input-group-button">
+                                <button type="button" class="button hollow circle update_cart_qty" data-quantity="plus"
+                                    data-field="quantity">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="my-3">
+                            <button class="btn btn-primary remove_item_btn" id="remove_item">Remove Item</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="center-wrapper">
+        <div class="content">
+            <div class="bag-total">
+                <div class="append_div">
+                    <div class="subtotal">
+                        <p class="sub_total">Subtotal:</p>
+                        <p class="amt">Rs. <span id="amount">{{amount}}</span></p>
+                    </div>
+                    <div class="subtotal">
+                        <p class="sub_total">Shipping:</p>
+                        <p class="amt" id="shipping_amount">+ Rs. {{shipping_amount}}</p>
+                    </div>
+                </div>
+                <div class="total">
+                    <h3 class="ttl">Total:</h3>
+                    <h3 class="ttl_amt">Rs. <span id="total_amount">{{total_amount}}</span></h3>
+                </div>
+                <div class="promo-code">
+                    <input type="text" id="promo_code" placeholder="Enter your promo code">
+                    <button class="btn btn-outline-info" id="apply_btn">Apply</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="my-3 text-center btns">
+        <!-- <button class="btn btn-primary" id="home_btn">Back to Home</button> -->
+        <button class="btn btn-primary" id="buy_btn">Checkout</button>
+        <!-- <button class="btn btn-primary" id="clear_cart" data-bs-toggle="modal" data-bs-target="#clear_cart_">Clear Cart</button> -->
+    </div>
+
+    <!-- Clear cart modal Modal -->
+    <div class="modal fade" id="clear_cart_" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="clear_cart_" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 style="color: black;">Are you sure want to clear cart?</h4>
+                </div>
+                <button type="button" class="btn btn-info btn-sm" data-bs-dismiss="modal">No</button>
+                <button type="button" id="yes_clear" class="btn btn-success btn-sm">Yes</button>
+            </div>
+        </div>
+    </div>
+    <form method="post" hidden>
+        {% csrf_token %}
+    </form>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+{% endblock %}
+{% block js %}
+
+<script>
+    if ($('.col-sm-6').html() == undefined) {
+        $('#buy_btn').remove();
+        $('#clear_cart').remove();
+        toastr.info('Your cart is empty, Please add some items in your cart!');
+    }
+    $('.update_cart_qty').on('click', function () {
+        let btn_type = $(this).attr('data-quantity');
+        qty = '';
+        if (btn_type == "plus") {
+            let qty_input = $(this).parent('div').prev('input');
+            let current_qty = qty_input.val();
+            qty_input.val(parseInt(current_qty) + 1);
+            qty = qty_input.val();
+        }
+        else if (btn_type == "minus") {
+            let qty_input = $(this).parent('div').next('input');
+            let current_qty = qty_input.val();
+            if (current_qty == 0) {
+                return false;
+            }
+            qty_input.val(parseInt(current_qty) - 1);
+            qty = qty_input.val();
+        }
+        if (qty == 0) {
+            $(this).parent().parent().parent().parent().parent().remove();
+        }
+        if ($('.col-sm-6').html() == undefined) {
+            $('#buy_btn').remove();
+            $('#clear_cart').remove();
+            setTimeout(reload, 1000);
+        }
+        id = $(this).parent().parent().attr('data-id');
+        event.preventDefault();
+        data = {
+            'qty': qty,
+            'id': id,
+            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+        }
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'cart' %}",
+            data: data,
+            success: function (data) {
+                if (data.success == 'Cart Updated') {
+                    $('#amount').text((data.amount).toFixed(1));
+                    $('#total_amount').text((data.total_amount).toFixed(1));
+                    // toastr.success(data.success);
+                }
+                else if (data.success1 == 'Cart Updated' & data.reload == 'Yes') {
+                    $('.center-wrapper').remove();
+                    $('.btns').remove();
+                    toastr.success(data.success1);
+                    setTimeout(reload, 1000);
+                }
+                else {
+                    toastr.error('Please try again!');
+                }
+            }
+        })
+    })
+
+    function reload() {
+        window.location = '/';
+    }
+
+    $('#yes_clear').click(function () {
+        data = {
+            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+        }
+        event.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'cart' %}",
+            data: data,
+            success: function (data) {
+                if (data.success == 'Cart cleared.') {
+                    toastr.success(data.success);
+                    setTimeout(reload, 1000);
+                }
+                else {
+                    toastr.info(data.error);
+                }
+            }
+        })
+    })
+
+    $('.layout_padding').css('padding', '0px');
+
+    $('#home_btn').on('click', function () {
+        window.location = '/';
+    })
+
+    $('#buy_btn').on('click', function () {
+        window.location = '/checkout';
+    })
+
+    $('.remove_item_btn').on('click', function () {
+        this_ele = $(this);
+        prod_id = $(this).parent().parent().children('div').attr('data-id');
+        event.preventDefault();
+        data = {
+            'prod_id': prod_id,
+            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+        }
+        $.ajax({
+            type: "POST",
+            url: "{%  url 'cart' %}",
+            data: data,
+            success: function (data) {
+                if (data.success == 'Item Removed') {
+                    $(this_ele).parent().parent().parent().parent().remove();
+                    $('#amount').text((data.amount).toFixed(1));
+                    $('#total_amount').text((data.total_amount).toFixed(1));
+                    toastr.success(data.success);
+                }
+                else if (data.success1 == 'Item Removed' & data.reload == 'Yes') {
+                    $(this_ele).parent().parent().parent().parent().remove();
+                    $('.center-wrapper').remove();
+                    $('.btns').remove();
+                    toastr.success(data.success1);
+                    setTimeout(reload, 1000);
+                }
+                else {
+                    toastr.error('Please try again!');
+                }
+            }
+        })
+    })
+
+    $('#apply_btn').on('click', function () {
+        if (!($('.discount_price').html())) {
+            promo_code = $('#promo_code').val();
+            if (promo_code == '') {
+                toastr.info('Please enter your promo code!');
+            }
+            else {
+                data = {
+                    'promo_code': promo_code,
+                    'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                }
+                $.ajax({
+                    type: 'POST',
+                    url: "{% url 'cart' %}",
+                    data: data,
+                    success: function (data) {
+                        if (data.success == 'Code Applied') {
+                            // if (!($('.discount_price').html())) {
+                            //     $('.append_div').append(`<div class="discount_price subtotal"><p class="sub_total">Discount:</p><p class="amt" id="discount_amount">- Rs. ${data.promo_amount}</p></div>`)
+                            // }
+                            $('.append_div').append(`<div class="discount_price subtotal"><p class="sub_total">Discount:</p><p class="amt" id="discount_amount">- Rs. ${data.promo_amount}</p></div>`);
+                            $('#total_amount').text((data.total_amount).toFixed(1));
+                            $('#promo_code').prop('disabled', true);
+                            $('#apply_btn').prop('disabled', true);
+                            toastr.success(data.success);
+                        }
+                        else if (data.error == 'Please enter correct promo code!') {
+                            toastr.error(data.error);
+                        }
+                        else {
+                            toastr.info("Please try again!");
+                        }
+                    }
+                })
+            }
+        }
+        else{
+            toastr.info("Code already applied!");
+        }
+    })
+</script>
+{% endblock js %}

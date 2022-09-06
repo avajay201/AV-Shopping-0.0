@@ -1,0 +1,35 @@
+.info-wrap {
+    margin-top: -16px;
+    color: white;
+}
+
+.col-lg-5 {
+    margin-top: 1px;
+}
+
+.ftco-section{
+    background-image: url('/static/images/xbg_1.jpg.pagespeed.ic.S4I4nGbKRa.webp');
+    height: 100vh
+}
+
+.container{
+    margin-top: 0px;
+    margin-bottom: 0px
+}
+
+.col-lg-5{
+    margin-top: 0px;
+    color: white
+}
+
+.no-gutters{
+    margin-top: -20px;
+}
+
+.c1{
+    margin: 0px;
+}
+
+p-5{
+    margin-top: 1px;
+}

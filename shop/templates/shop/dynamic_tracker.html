@@ -1,0 +1,45 @@
+<article class="card">
+    <header class="card-header text-center"> My Order - Tracking </header>
+
+    <div class="card-body text-center">
+        <h6>Order ID: {{order_Id}}</h6>
+        <article class="card">
+            <div class="card-body row">
+                <div class="col"> 
+                    <strong>Status:</strong> 
+                    <br>{{order_update.update_choice}}{{order_update.update_desc}}
+                </div>
+            </div>
+        </article>
+        <div class="track">
+            <div class="step {{placed_class}}"> 
+                <span class="icon"> 
+                    <i class="fa fa-check"></i> 
+                </span> 
+                <span class="text">Order confirmed</span> 
+            </div>
+            <div class="step {{courier_class}}"> 
+                <span class="icon"> 
+                    <i class="fa fa-user"></i> 
+                </span> 
+                <span class="text">Picked by courier</span> 
+            </div>
+            <div class="step {{recived_class}}">
+                 <span class="icon"> 
+                    <i class="fa fa-truck"></i> 
+                </span> 
+                <span class="text"> On the way </span> 
+            </div>
+            <div class="step {{dilivered}}"> 
+                <span class="icon"> 
+                    <i class="fa fa-box"></i> 
+                </span> 
+                <span class="text">Delivered</span> 
+            </div>
+        </div>
+        <hr><hr>
+        <a href="/" class="btn btn-warning" data-abc="true"> 
+            <i class="fa fa-chevron-left"></i> Back to home</a>
+        </div>
+    </article>
+                   

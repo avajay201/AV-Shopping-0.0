@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <!-- basic -->
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <!-- mobile metas -->
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+   <!-- site metas -->
+   <title>AV Shopping</title>
+   <meta name="keywords" content="">
+   <meta name="description" content="">
+   <meta name="author" content="">
+   <!-- bootstrap css -->
+   {% load static %}
+   <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+   <!-- style css -->
+   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+   <!-- Responsive-->
+   <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+   <!-- fevicon -->
+   <link rel="icon" href="{% static 'images/site-logo.png' %}" type="image/gif" />
+   <!-- Scrollbar Custom CSS -->
+   <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}">
+   <!-- Tweaks for older IEs-->
+   <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+   <!-- fonts -->
+   <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+   <!-- font awesome -->
+   <link rel="stylesheet" type="text/css"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+   <!--  -->
+   <!-- owl stylesheets -->
+   <link href="https://fonts.googleapis.com/css?family=Great+Vibes|Poppins:400,700&display=swap&subset=latin-ext"
+      rel="stylesheet">
+   <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+   <link rel="stylesoeet" href="{% static 'css/owl.theme.default.min.css' %}">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+      media="screen">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+   <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap1.css' %}" />
+   <!-- font awesome style -->
+   <link href="{% static 'css/font-awesome1.min.css' %}" rel="stylesheet" />
+   <!-- Custom styles for this template -->
+   <link href="{% static 'css/style1.css' %}" rel="stylesheet" />
+   <!-- responsive style -->
+   <link href="{% static 'css/responsive1.css' %}" rel="stylesheet" />
+
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+<style>
+   .modal-content {
+      background: #81cb6b;
+   }
+
+   .username {
+      color: #ace1af;
+      font-weight: bold;
+   }
+
+   .login_signup {
+      margin-left: 15px;
+   }
+
+   #cat_select {
+      padding: 8px;
+   }
+
+   .form-select {
+      margin-left: 32px;
+      margin-right: -50px;
+   }
+
+   .main {
+      margin-right: 16px;
+      margin-left: 33px;
+   }
+
+   .header_box {
+      margin-right: 29px;
+   }
+
+   /* 
+   .logout{
+      color: #ace1af;
+   } */
+</style>
+
+<body>
+   <!-- banner bg main start -->
+   <div class="banner_bg_main">
+      <!-- header top section start -->
+      <div class="container">
+         <div class="header_section_top">
+            <div class="row">
+               <div class="col-sm-12">
+                  <div class="custom_menu">
+                     <ul>
+                        <li><a href="{% url 'shophome' %}">Home</a></li>
+                        <li><a href="{% url 'my_orders' %}">My Orders</a></li>
+                        <li><a href="/tracker">Tracker</a></li>
+                        <li><a href="{% url 'tracker' %}">About</a></li>
+                        <li><a href="{% url 'contact' %}">Contcat Us</a></li>
+                        <div class="lang_box" id="google_translate_element"></div>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- header top section start -->
+      <!-- header section start -->
+      <div class="header_section">
+         <div class="container">
+            <div class="containt_main">
+               <div class="main">
+                  <!-- Another variation with a button -->
+                  <form action="{% url 'search' %}" method="post">
+                     {% csrf_token %}
+                     <div class="input-group">
+                        <input type="text" required maxlength="55" name="query" class="form-control"
+                           placeholder="Search your item...">
+                        <div class="input-group-append">
+                           <button class="btn btn-secondary" type="submit"
+                              style="background-color: #f26522; border-color:#f26522 ">
+                              <i class="fa fa-search"></i>
+                           </button>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+               <div class="header_box">
+                  <div class="login_menu">
+                     <button type="button" id="cart_btn" class="btn btn-light mx-3">Cart(<span
+                           id="cart_len">{{len_cart}}</span>)
+                     </button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- header section end -->
+   </div>
+   <!-- banner bg main end -->
+   <!-- product section -->
+
+   <section class="product_section layout_padding">
+      <div class="container">
+         <div class="row">
+            <div class="heading_container heading_center">
+             <h2>
+                 <span>All Products</span>
+             </h2>
+         </div>
+            {% for product in allprods %}
+            <div class="col-sm-6 col-md-4 col-lg-4">
+               <div class="box">
+                  <div class="option_container">
+                     <div class="options">
+                        <a href="productview/{{product.id}}" class="option1">
+                           View
+                        </a>
+                        {% if user.is_authenticated %}
+                        {% if product.name in cart_items_list %}
+                        <a class="btn btn-primary disabled btn-sm" style="color:white;">Added to Cart</a>
+                        {% else %}
+                        <a class="btn btn-primary btn-sm cart" style="color: white;"
+                           data-id="{{product.id}}">Add to Cart</a>
+                        {% endif %}
+                        {% else %}
+                        <a class="btn btn-primary btn-sm no_cart" style="color: white;"
+                           data-id="{{product.id}}">Add to Cart</a>
+                        {% endif %}
+                     </div>
+                  </div>
+                  <div class="img-box">
+                     <img src="/media/{{product.image}}" alt="">
+                  </div>
+                  <div class="detail-box">
+                     <h5 id="name">
+                        {{product.name|slice:"0:15"}}
+                     </h5>
+                     <p id="namepr{{product.id}}" hidden>{{product.name}}</p>
+                     <h6>
+                        Rs. <span id="pricepr{{product.id}}">{{product.price}}</span>
+                     </h6>
+                  </div>
+                  <div class="text-center">
+                     <h6 align="center">
+                        <b style="color: rgb(0, 27, 80);">{{product.discount}}% off</b>
+                     </h6>
+                  </div>
+               </div>
+            </div>
+            {% endfor %}
+         </div>
+      </div>
+
+
+      <!-- Login Modal -->
+      <div class="modal fade" id="login_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="login_modal" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="login_modal">Sign In</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                  <form method="post">
+                     {% csrf_token %}
+                     <div class="mb-3">
+                        <label for="login_username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="login_username" aria-describedby="emailHelp">
+                     </div>
+                     <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="login_password">
+                     </div>
+                     <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="sign_in_btn">Sign In</button>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- Sign Up Modal -->
+      <div class="modal fade" id="signup_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="signup_modal" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="signup_modal">Sign Up</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                  <form method="post">
+                     {% csrf_token %}
+                     <div class="mb-3">
+                        <label for="fname" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="fname" aria-describedby="emailHelp">
+                     </div>
+                     <div class="mb-3">
+                        <label for="lname" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="lname" aria-describedby="emailHelp">
+                     </div>
+                     <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="sign_up_username" aria-describedby="emailHelp">
+                     </div>
+                     <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="sign_up_email" aria-describedby="emailHelp">
+                     </div>
+                     <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="sign_up_password">
+                     </div>
+                     <div class="mb-3">
+                        <label for="c_password" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="c_password">
+                     </div>
+                     <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="sign_up_btn">Submit</button>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- end product section -->
+   <!-- copyright section start -->
+   <div class="copyright_section">
+      <div class="container">
+         <p class="copyright_text">© 2022 All Rights Reserved.</p>
+      </div>
+   </div>
+   <!-- copyright section end -->
+   <!-- Javascript files-->
+   <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+      integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+      crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+      integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+      crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"></script>
+
+   <script type="text/javascript"
+      src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+   <script>
+      function googleTranslateElementInit() {
+         new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+         $('.goog-logo-link').remove()
+         $('.skiptranslate').css("margin-bottom", "-17px")
+         $('.lang_box').css({ "margin-top": "3px", "margin-left": "25px" })
+         $('*:contains("Powered by")').each(function () {
+            if ($(this).children().length < 1)
+               $(this).css({ "color": "#2b2a29" })
+         });
+      }
+      function openNav() {
+         document.getElementById("mySidenav").style.width = "250px";
+      }
+
+      function closeNav() {
+         document.getElementById("mySidenav").style.width = "0";
+      }
+   </script>
+</body>
+
+</html>
+<script>
+   $('.no_cart').on('click', function(){
+      toastr.info('Please sign in to your account for use cart!')
+      $('.toast').css('background-color', '#2f96b4');
+   })
+   $('.form-select').on('click', function () {
+      $('#form_id').submit();
+   })
+
+   $('#cart_btn').on('click', function () {
+      if ($('#cart_len').text() > 0) {
+         window.location = '/cart';
+      }
+      else {
+         toastr.info('Your cart is empty, Please add some items in your cart!');
+         $('.toast').css('background-color', '#2f96b4');
+      }
+   });
+
+   function reload() {
+      window.location = '/';
+   }
+
+   $('.cart').on('click', function () {
+         let self = $(this);
+         let product_id = self.attr('data-id');
+         data = {
+            'product_id': product_id,
+            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+         }
+         $.ajax({
+            type: 'POST',
+            url: "{% url 'shophome' %}",
+            data: data,
+            success: function (data) {
+               if (data.success == 'Item added to cart.') {
+                  $('#cart_len').text(data.len_cart);
+                  toastr.success(data.success);
+                  $('.toast').css('background-color', '#51a351');
+                  self.removeClass('cart');
+                  self.text('Added to Cart');
+                  self.addClass("disabled")
+               }
+               else {
+                  toastr.success(data.error);
+                  $('.toast').css('background-color', '#bd362f');
+               }
+            }
+         })
+   })
+
+   $('#sign_up_btn').on('click', function () {
+      event.preventDefault();
+      fname = $('#fname').val();
+      lname = $('#lname').val();
+      email = $('#sign_up_email').val();
+      username = $('#sign_up_username').val();
+      password = $('#sign_up_password').val();
+      c_password = $('#c_password').val();
+      data = {
+         'fname': fname,
+         'lname': lname,
+         'email': email,
+         'username': username,
+         'password': password,
+         'c_password': c_password,
+         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+      }
+      $.ajax({
+         type: 'POST',
+         url: "{% url 'sign_up' %}",
+         data: data,
+         success: function (data) {
+            if (data.error == 'Please fill these all details!') {
+               toastr.error(data.error);
+               $('.toast').css('background-color', '#bd362f');
+            }
+            else if (data.error == 'Password not matched!') {
+               toastr.error(data.error);
+               $('.toast').css('background-color', '#bd362f');
+            }
+            else if (data.error == 'Entered username already exists. Please try different username!') {
+               toastr.error(data.error);
+               $('.toast').css('background-color', '#bd362f');
+            }
+            else if (data.success == 'Your account successfully created!') {
+               toastr.success(data.success);
+               $('.toast').css('background-color', '#51a351');
+               setTimeout(reload, 1000);
+            }
+         }
+      })
+   })
+
+
+   $('#sign_in_btn').on('click', function () {
+      event.preventDefault();
+      username = $('#login_username').val();
+      password = $('#login_password').val();
+      data = {
+         'username': username,
+         'password': password,
+         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+      }
+      $.ajax({
+         type: 'POST',
+         url: "{% url 'sign_in' %}",
+         data: data,
+         success: function (data) {
+            if (data.error == 'Please enter correct username or password!') {
+               toastr.error(data.error);
+               $('.toast').css('background-color', '#bd362f');
+            }
+            else if (data.error == 'Please enter username and password!') {
+               toastr.error(data.error);
+               $('.toast').css('background-color', '#bd362f');
+            }
+            else if (data.success == 'Sign in successfully!') {
+               toastr.success(data.success);
+               $('.toast').css('background-color', '#51a351');
+               setTimeout(reload, 1000);
+            }
+         }
+      })
+   })
+
+   $('.logout').on('click', function () {
+      data = {
+         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+      }
+      $.ajax({
+         url: "{% url 'logout' %}",
+         type: 'POST',
+         data: data,
+         success: function (data) {
+            toastr.success(data.success);
+            $('.toast').css('background-color', '#51a351');
+            setTimeout(reload, 1000);
+         }
+      })
+   });
+</script>
