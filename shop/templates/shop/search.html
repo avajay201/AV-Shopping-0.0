@@ -58,6 +58,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 </head>
 
+<style>
+    .text-center{
+        font-weight: bold;
+    }
+
+    .product_section .box{
+        border-radius: 25px;
+        background-color: #ffffff;
+        border: solid #fff8f8 10px;
+    }
+
+    .product_section .box .img-box img{
+        max-width: 100%;
+        max-height: 200px;
+        transition: all .3s;
+    }
+</style>
+
 <body>
     <!-- banner bg main start -->
     <div class="banner_bg_main">
@@ -122,7 +140,7 @@
                             </div>
                         </div>
                         <div class="img-box">
-                            <img src="/media/{{product.image}}" alt="">
+                            <img class="p_img" src="/media/{{product.image}}" alt="">
                         </div>
                         <div class="detail-box">
                             <h5 id="name">

@@ -497,7 +497,6 @@ def cart(request):
                     for item in cart_items:
                         amount = amount + item.price
                     total_amount = amount + shipping_amount
-                    print(total_amount, code.promo_amount, 'llllllllllllllllllllll')
                     if total_amount > code.promo_amount:
                         total_amount = total_amount - code.promo_amount
                         temp_amtt.temp_amt = total_amount
@@ -637,6 +636,10 @@ def checkout_done(request):
         temp_amtt = TempAmount.objects.all().first()
         if temp_amtt.temp_amt > 0:
             amount = temp_amtt.temp_amt
+        prod_id = []
+        for item in cart_items:
+            print(item, '==========+++++==========')
+            prod_id.append(item.id)
         name = request.POST.get('name')
         email = request.POST.get('email')
         address_line1 = request.POST.get('address_line1')
@@ -649,7 +652,7 @@ def checkout_done(request):
         session_list.append(amount)
         if (len(name) > 2 or len(city) > 2 or len(state) > 2 or len(phone) > 9):
             pass
-            order = Order(amount=amount, payment_status= False, name=name, email=email, address_line1=address_line1,
+            order = Order(amount=amount, items_id=prod_id, payment_status= False, name=name, email=email, address_line1=address_line1,
                           address_line2=address_line2, city=city, state=state, phone=phone, zip_code=zip_code)
             order.save()
             order_update = OrderUpdate(

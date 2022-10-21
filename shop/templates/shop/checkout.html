@@ -36,13 +36,13 @@
                     <h3 class="text-center">Shipping Details</h3>
                     <form class="row contact_form" action="#" method="post" novalidate="novalidate">
                         <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                            <input type="text" class="form-control" id="name" name="name" value="{{user.first_name}} {{user.last_name}}" placeholder="Name">
                         </div>
                         <div class="col-md-6 form-group p_star">
                             <input type="text" class="form-control" id="phone" name="phone" placeholder="Mobile number">
                         </div>
                         <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" id="email" name="compemailany" placeholder="Email">
+                            <input type="text" class="form-control" id="email" name="compemailany" value="{{user.email}}" placeholder="Email">
                         </div>
                         <div class="col-md-12 form-group p_star">
                             <input type="text" class="form-control" id="address1" name="address1" placeholder="Address Line 01">

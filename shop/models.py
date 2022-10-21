@@ -1,5 +1,4 @@
 from pyexpat import model
-from typing_extensions import Required
 from django.db import models
 import datetime
 from django.contrib.auth.models import AbstractUser
@@ -19,6 +18,28 @@ class Product(models.Model):
     price = models.FloatField()
     discount = models.FloatField(default='')
     description = models.TextField(max_length=5000, default='')
+    brand = models.CharField(max_length=300)
+    model_name = models.CharField(max_length=300)
+    manufacturer = models.CharField(max_length=300)
+    country_of_origin = models.CharField(max_length=300)
+    item_weight = models.CharField(max_length=300)
+    os = models.CharField(max_length=300)
+    color = models.CharField(max_length=300)
+    network_service_provider = models.CharField(max_length=300)
+    cellular_technology = models.CharField(max_length=300)
+    whats_in_the_box = models.CharField(max_length=300)
+    proccessor = models.CharField(max_length=300)
+    ram = models.CharField(max_length=300)
+    storage = models.CharField(max_length=300)
+    fingerprint_sensor = models.CharField(max_length=300)
+    product_dimensions = models.CharField(max_length=300)
+    battery = models.CharField(max_length=300)
+    connectivity_technologies = models.CharField(max_length=300)
+    gps = models.CharField(max_length=300)
+    display_technology = models.CharField(max_length=300)
+    camera_features = models.CharField(max_length=300)
+    audio_jack = models.CharField(max_length=300)
+    special_features = models.CharField(max_length=300)
 
     def __str__(self):
         return self.name[0:60]  
@@ -35,7 +56,7 @@ class Contact(models.Model):
     
 
 class Order(models.Model):
-    allitems = models.TextField(max_length=1000)
+    items_id = models.TextField(max_length=500)
     payment_status = models.BooleanField()
     amount = models.FloatField()
     name = models.CharField(max_length=100)

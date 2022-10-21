@@ -253,17 +253,6 @@
       text-align: center;
    }
 
-
-
-
-
-
-
-
-
-
-
-
    /* .modal-content {
       background: #81cb6b;
    } */
@@ -274,7 +263,8 @@
    }
 
    .login_signup {
-      margin-left: 15px;
+      margin-top: -8px;
+      margin-right: -14px;
    }
 
    #cat_select {
@@ -325,6 +315,23 @@
       margin: 0px;
    }
 
+   .product_section .box{
+      border-radius: 25px;
+      background-color: #ffffff;
+   }
+
+   .product_section .box .img-box img{
+      max-width: 100%;
+      max-height: 200px;
+      transition: all .3s;
+  }
+
+  .account_icon{
+      height: auto;
+      width: 25px;
+      color: white;
+  }
+
 </style>
 
 <body>
@@ -350,9 +357,12 @@
                               id="user_image" src="{{user.image.url}}" /></button>
                         {% else %}
                         <li class="login_signup">
-                           <button type="button" class="btn-outline-info" data-bs-toggle="modal"
+                           <button type="button" class="btn my_account" data-bs-toggle="modal"
                               data-bs-target="#login_modal">
-                              Sign In
+                              <svg class="account_icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                 <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                               </svg>
                            </button>
                            <!-- <button type="button" class="mx-2 btn-outline-info" data-bs-toggle="modal"
                               data-bs-target="#signup_modal">
@@ -826,8 +836,8 @@
                data: data,
                success: function (data) {
                   if (data.success == 'Username matched') {
-                     toastr.success(data.success);
-                     $('.toast').css('background-color', '#51a351');
+                     // toastr.success(data.success);
+                     // $('.toast').css('background-color', '#51a351');
                      $('#forget_username').attr('disabled', true);
                      $('#forget_in_btn').hide();
                      $('.sign-in-htm').append('<div class="group"><label for="pass1" class="label"></label><input id="pass1" placeholder="New Password" type="text" class="input"></div><div class="group"><label for="pass2" class="label"></label><input placeholder="Confirm Password" id="pass2" type="text" class="input"></div><div class="group"><button type="button" class="button" id="save_pass">Save Password</button></div>');
