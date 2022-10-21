@@ -379,7 +379,7 @@ def my_orders(request):
     return render(request, 'shop/my_orders.html', {'orders': orders})
 
 
-def productview(request, id):
+def productview(request, id, name):
     temp_amtt = TempAmount.objects.all().last()
     temp_amtt.temp_amt = 0
     temp_amtt.save()

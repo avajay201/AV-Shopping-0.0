@@ -307,10 +307,6 @@
       background-color: white;
    }
 
-   .close_btnnn{
-      margin: 0px;
-   }
-
    .modal-footer>*{
       margin: 0px;
    }
@@ -484,7 +480,7 @@
                <div class="box">
                   <div class="option_container">
                      <div class="options">
-                        <a href="productview/{{product.id}}" class="option1">
+                        <a href="productview/{{product.id}}/{{product.name}}" class="option1">
                            View
                         </a>
                         {% if user.is_authenticated %}
@@ -665,8 +661,8 @@
          <div class="modal-dialog">
             <div class="modal-content">
                <div class="modal-header">
-                  <h5 class="modal-title" id="user_profile">Profile</h5>
-                  <button type="button" class="btn-close close_btnnn" data-bs-dismiss="modal" aria-label="Close"></button>
+                  <h5 class="modal-title" id="user_profile" style="color: white;">Profile</h5>
+                  <button type="button" class="btn-close close_btnnn" style="margin: 0px; border-radius: 12px;" data-bs-dismiss="modal" aria-label="Close"></button>
                </div>
                <div class="modal-body">
                   <form method="POST" id="user-pofile-form" enctype="multipart/form-data">

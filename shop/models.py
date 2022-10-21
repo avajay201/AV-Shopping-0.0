@@ -1,7 +1,9 @@
 from pyexpat import model
+from statistics import multimode
 from django.db import models
 import datetime
 from django.contrib.auth.models import AbstractUser
+from sqlalchemy import true
 # Create your models here.
 
 class Extra_fields(AbstractUser):
@@ -10,12 +12,21 @@ class Extra_fields(AbstractUser):
 class default_image(models.Model):
     image = models.ImageField(upload_to = 'shop/images')
 
+UPDATE_CHOICES_1 = (
+    ("In Stock", "In Stock"),
+    ("Not In Stock", "Not In Stock")
+)
 class Product(models.Model):
     category = models.CharField(max_length=100, default='')
     sub_category = models.CharField(max_length=100, default='')
     name = models.CharField(max_length=100, default='')
     image = models.ImageField(upload_to='shop/images', default='')
     price = models.FloatField()
+    availibility = models.CharField(
+        max_length=200,
+        choices = UPDATE_CHOICES_1,
+        default = 'In Stock'
+        )
     discount = models.FloatField(default='')
     description = models.TextField(max_length=5000, default='')
     brand = models.CharField(max_length=300)
