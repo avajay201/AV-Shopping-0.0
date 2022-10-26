@@ -5,9 +5,10 @@
 {% endblock head %}
 {% block title %}AV Shopping - {{product.name}}{% endblock title %}
 {% block style %}
+
 .img-fluid{
 max-height: 100%;
-width: 50%;
+max-width: 100%;
 }
 
 .s_Product_carousel{
@@ -97,11 +98,6 @@ font-family: cursive;
                         <a class="btn primary-btn no_cart" data-id="{{product.id}}" type="button">Add to Cart</a>
                     </div>
                     {% endif %}
-                    <!-- {% for dec in desc %}
-                    <li>
-                        <p style="color:black;">{{dec}}</p>
-                    </li>
-                    {% endfor %} -->
                 </div>
             </div>
         </div>
@@ -114,72 +110,72 @@ font-family: cursive;
 <div class="prod_details row">
     <div class="details col-lg-6">
         <p class="about_phone">
-            Brand&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;:&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<span
+            Brand&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;:&emsp;&nbsp;<span
                 class="span_spec">{{product.brand|slice:"0:50"}}</span></p>
         <p class="about_phone">Model
-            Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;:&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<span
+            Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;:&emsp;&nbsp;<span
                 class="span_spec">{{product.model_name|slice:"0:50"}}</span></p>
         <p class="about_phone">
-            Manufacturer&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;:&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<span
+            Manufacturer&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;:&emsp;&nbsp;<span
                 class="span_spec">{{product.manufacturer|slice:"0:50"}}</span></p>
         <p class="about_phone">Country of
-            Origin&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<span
+            Origin&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:&emsp;&nbsp;<span
                 class="span_spec">{{product.country_of_origin|slice:"0:50"}}</span></p>
         <p class="about_phone">Item
-            Weight&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;:&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<span
+            Weight&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;:&emsp;&nbsp;<span
                 class="span_spec">{{product.item_weight|slice:"0:50"}}</span></p>
         <p class="about_phone">
-            OS&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;:&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<span
+            OS&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;:&emsp;&nbsp;<span
                 class="span_spec">{{product.os|slice:"0:50"}}</span></p>
         <p class="about_phone">
-            Color&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;:&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<span
+            Color&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;:&emsp;&nbsp;<span
                 class="span_spec">{{product.color|slice:"0:50"}}</span></p>
         <p class="about_phone">Network Service
-            Provider&emsp;&emsp;&emsp;&nbsp;:&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<span
+            Provider&emsp;&emsp;&emsp;&nbsp;:&emsp;&nbsp;<span
                 class="span_spec">{{product.network_service_provider|slice:"0:50"}}</span></p>
         <p class="about_phone">Cellular
-            Technology&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<span
+            Technology&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:&emsp;&nbsp;<span
                 class="span_spec">{{product.cellular_technology|slice:"0:50"}}</span></p>
         <p class="about_phone">Whats in the
-            box&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;:&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<span
+            box&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;:&emsp;&nbsp;<span
                 class="span_spec">{{product.whats_in_the_box|slice:"0:50"}}</span></p>
         <p class="about_phone">
-            Proccessor&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;:&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<span
+            Proccessor&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;:&emsp;&nbsp;<span
                 class="span_spec">{{product.proccessor|slice:"0:50"}}</span></p>
     </div>
     <div class="details col-lg-6">
         <p class="about_phone">
-            RAM&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;:&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<span
+            RAM&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;:&emsp;&nbsp;<span
                 class="span_spec">{{product.ram|slice:"0:50"}}</span></p>
         <p class="about_phone">
-            Storage&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;:&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<span
+            Storage&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;:&emsp;&nbsp;<span
                 class="span_spec">{{product.storage|slice:"0:50"}}</span></p>
         <p class="about_phone">Fingerprint
-            Sensor&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;:&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<span
+            Sensor&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;:&emsp;&nbsp;<span
                 class="span_spec">{{product.fingerprint_sensor|slice:"0:50"}}</span></p>
         <p class="about_phone">Product
-            Dimensions&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;:&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<span
+            Dimensions&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;:&emsp;&nbsp;<span
                 class="span_spec">{{product.product_dimensions|slice:"0:50"}}</span></p>
         <p class="about_phone">
-            Battery&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;:&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<span
+            Battery&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;:&emsp;&nbsp;<span
                 class="span_spec">{{product.battery|slice:"0:50"}}</span></p>
         <p class="about_phone">Connectivity
-            technologies&emsp;&emsp;&emsp;:&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<span
+            technologies&emsp;&emsp;&emsp;:&emsp;&nbsp;<span
                 class="span_spec">{{product.connectivity_technologies|slice:"0:50"}}</span></p>
         <p class="about_phone">
-            GPS&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;:&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<span
+            GPS&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;:&emsp;&nbsp;<span
                 class="span_spec">{{product.gps|slice:"0:50"}}</span></p>
         <p class="about_phone">Display
-            technology&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<span
+            technology&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:&emsp;&nbsp;<span
                 class="span_spec">{{product.display_technology|slice:"0:50"}}</span></p>
         <p class="about_phone">Camera
-            features&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;:&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<span
-                class="span_spec">{{product.camera_fetures|slice:"0:50"}}</span></p>
+            features&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;:&emsp;&nbsp;<span
+                class="span_spec">{{product.camera_features|slice:"0:50"}}</span></p>
         <p class="about_phone">Audio
-            Jack&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;:&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<span
+            Jack&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;:&emsp;&nbsp;<span
                 class="span_spec">{{product.audio_jack|slice:"0:50"}}</span></p>
         <p class="about_phone">Special
-            features&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;:&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<span
+            features&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;:&emsp;&nbsp;<span
                 class="span_spec">{{product.special_features|slice:"0:50"}}</span></p>
     </div>
 </div>

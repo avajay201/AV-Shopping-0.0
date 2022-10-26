@@ -253,9 +253,6 @@
       text-align: center;
    }
 
-   /* .modal-content {
-      background: #81cb6b;
-   } */
 
    .username {
       color: #ace1af;
@@ -297,11 +294,6 @@
       background-color: #2b2a29;
    }
 
-   .modal-content {
-      background-color: #3d4c74;
-      border-radius: 56px;
-   }
-
    .btn-close {
       margin-left: 86px;
       background-color: white;
@@ -326,6 +318,11 @@
       height: auto;
       width: 25px;
       color: white;
+  }
+
+  .login_reg{
+   color: white;
+   font-weight: bold;
   }
 
 </style>
@@ -353,17 +350,13 @@
                               id="user_image" src="{{user.image.url}}" /></button>
                         {% else %}
                         <li class="login_signup">
-                           <button type="button" class="btn my_account" data-bs-toggle="modal"
-                              data-bs-target="#login_modal">
+                           <a type="button" class="btn my_profile" href="account">
                               <svg class="account_icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                                  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
                                </svg>
-                           </button>
-                           <!-- <button type="button" class="mx-2 btn-outline-info" data-bs-toggle="modal"
-                              data-bs-target="#signup_modal">
-                              Sign Up
-                           </button> -->
+                               <span class="login_reg">Login/Register</span>
+                           </a>
                         </li>
                         {% endif %}
                      </ul>
@@ -518,251 +511,6 @@
             {% endfor %}
          </div>
       </div>
-
-
-      <!-- Login & Sign Up Modal -->
-      <div class="modal fade" id="login_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-         aria-labelledby="login_modal" aria-hidden="true">
-         <div class="modal-dialog">
-            <div class="modal-content">
-               <!-- <div class="modal-header">
-                  <h5 class="modal-title" id="login_modal">Sign In</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-               </div> -->
-               <div class="modal-body">
-                  <form method="post">
-                     {% csrf_token %}
-                     <div class="login-wrap">
-                        <div class="login-html">
-                           <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1"
-                              class="tab">Sign In</label>
-                           <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign
-                              Up<button type="button" class="btn-close" data-bs-dismiss="modal"
-                                 aria-label="Close"></button></label>
-                           <div class="login-form">
-                              <div class="sign-in-htm">
-                                 <div class="group">
-                                    <label for="login_username" class="label"></label>
-                                    <input id="login_username" type="text" placeholder="Username" class="input">
-                                 </div>
-                                 <div class="group">
-                                    <label for="login_password" class="label"></label>
-                                    <input id="login_password" placeholder="Password" type="password" class="input"
-                                       data-type="password">
-                                 </div>
-                                 <!-- <div class="group">
-                                    <input id="check" type="checkbox" class="check" checked>
-                                    <label for="check"><span class="icon"></span> Keep me Signed in</label>
-                                 </div> -->
-                                 <div class="group">
-                                    <input type="submit" class="button" id="sign_in_btn" value="Sign In">
-                                 </div>
-                                 <div class="hr"></div>
-                                 <div class="foot-lnk">
-                                    <a type="button" id="forget_pass">Forgot Password?</a>
-                                 </div>
-                              </div>
-                              <div class="sign-up-htm">
-                                 <div class="group">
-                                    <label for="sign_up_username" class="label"></label>
-                                    <input id="sign_up_username" type="text" placeholder="enter username..."
-                                       class="input">
-                                 </div>
-                                 <div class="group">
-                                    <label for="user" class="label"></label>
-                                    <input id="fname" type="text" placeholder="First Name" class="input">
-                                 </div>
-                                 <div class="group">
-                                    <label for="user" class="label"></label>
-                                    <input id="lname" type="text" placeholder="Last Name" class="input">
-                                 </div>
-                                 <div class="group">
-                                    <label for="email" class="label"></label>
-                                    <input id="email" type="text" placeholder="Email" class="input">
-                                 </div>
-                                 <div class="group">
-                                    <label for="password" class="label"></label>
-                                    <input id="password" type="password" placeholder="Password" class="input"
-                                       data-type="password">
-                                 </div>
-                                 <div class="group">
-                                    <label for="c_password" class="label"></label>
-                                    <input id="c_password" type="password" placeholder="Confirm Password" class="input"
-                                       data-type="password">
-                                 </div>
-                                 <div class="group">
-                                    <input type="button" class="button" id="sign_up_btn" value="Sign Up">
-                                 </div>
-                                 <!-- <div class="hr"></div>
-                                 <div class="foot-lnk">
-                                    <label for="tab-1">Already Member?</a>
-                                 </div> -->
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </form>
-               </div>
-            </div>
-         </div>
-      </div>
-
-      <!-- Sign Up Modal -->
-      <!-- <div class="modal fade" id="signup_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-         aria-labelledby="signup_modal" aria-hidden="true">
-         <div class="modal-dialog">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <h5 class="modal-title" id="signup_modal">Sign Up</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-               </div>
-               <div class="modal-body">
-                  <form method="post">
-                     {% csrf_token %}
-                     <div class="mb-3">
-                        <label for="fname" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="fname" aria-describedby="emailHelp">
-                     </div>
-                     <div class="mb-3">
-                        <label for="lname" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" id="lname" aria-describedby="emailHelp">
-                     </div>
-                     <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="sign_up_username" aria-describedby="emailHelp">
-                     </div>
-                     <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="sign_up_email" aria-describedby="emailHelp">
-                     </div>
-                     <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="sign_up_password">
-                     </div>
-                     <div class="mb-3">
-                        <label for="c_password" class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control" id="c_password">
-                     </div>
-                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="sign_up_btn">Submit</button>
-                     </div>
-                  </form>
-               </div>
-            </div>
-         </div>
-      </div> -->
-
-
-
-      <!-- User Profile Modal -->
-      <div class="modal fade" id="user_profile" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-         aria-labelledby="user_profile" aria-hidden="true">
-         <div class="modal-dialog">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <h5 class="modal-title" id="user_profile" style="color: white;">Profile</h5>
-                  <button type="button" class="btn-close close_btnnn" style="margin: 0px; border-radius: 12px;" data-bs-dismiss="modal" aria-label="Close"></button>
-               </div>
-               <div class="modal-body">
-                  <form method="POST" id="user-pofile-form" enctype="multipart/form-data">
-                     {% csrf_token %}
-                     <input type="hidden" id="user_id" value="{{user.id}}">
-                     <div class="row">
-                        <div class="col">
-                           <input type="text" class="form-control username" placeholder="Username" name="username"
-                              value="{{user.username}}" disabled id="change_username">
-                        </div>
-                     </div>
-                     <div class="row">
-                        <div class="col">
-                           <input type="text" disabled class="form-control fname" placeholder="First Name"
-                              id="change_fname" value="{{user.first_name}}">
-                        </div>
-                     </div>
-                     <div class="row">
-                        <div class="col">
-                           <input type="text" disabled class="form-control lname" placeholder="Last Name"
-                              id="change_lname" value="{{user.last_name}}">
-                        </div>
-                     </div>
-                     <div class="row">
-                        <div class="col">
-                           <input type="text" disabled class="form-control email" placeholder="Email" id="change_email"
-                              value="{{user.email}}">
-                        </div>
-                     </div>
-                     <div class="row">
-                        <div class="col">
-                           <input type="file" disabled name="image" class="form-control image"
-                              id="change_profile_image">
-                        </div>
-                     </div>
-                     <div class="modal-footer">
-                        <div class="fotter_btns">
-                           <button type="button" class="btn btn-primary btn-sm mx-2" id="logout">Logout</button>
-                           <button type="button" class="btn btn-secondary btn-sm mx-2"
-                              data-bs-dismiss="modal">Close</button>
-                           <button type="button" class="btn btn-primary btn-sm mx-2" id="change_profile_btn">Change
-                              Pofile</button>
-                           <button type="button" class="btn btn-primary btn-sm mx-2" id="change_pass_btn"
-                              data-bs-toggle="modal" data-bs-target="#change_pass">Change
-                              Password</button>
-                        </div>
-                     </div>
-                  </form>
-               </div>
-            </div>
-         </div>
-      </div>
-
-
-      <!-- User Password Modal -->
-      <div class="modal fade" id="change_pass" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-         aria-labelledby="change_pass" aria-hidden="true">
-         <div class="modal-dialog">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <h5 class="modal-title" id="change_pass">Change Password</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-               </div>
-               <div class="modal-body">
-                  <form method="POST" id="user-pass-form">
-                     {% csrf_token %}
-                     <div class="row">
-                        <div class="col">
-                           <input type="hidden" id="hiiden_id" name="user-id" value="{{user.id}}">
-                        </div>
-                     </div>
-                     <div class="row">
-                        <div class="col">
-                           <input type="text" class="form-control username" placeholder="Username" name="username"
-                              value="{{user.username}}" disabled id="change_username_pass">
-                        </div>
-                     </div>
-                     <div class="row">
-                        <div class="col">
-                           <input type="password" class="form-control password" placeholder="Password"
-                              id="change_password">
-                        </div>
-                        <div class="col">
-                           <input type="password" class="form-control c_password" placeholder="Confirm Password"
-                              id="change_c_password">
-                        </div>
-                     </div>
-                     <div class="modal-footer">
-                        <div class="fotter_btns">
-                           <button type="button" class="btn btn-secondary btn-sm mx-2"
-                              data-bs-dismiss="modal">Close</button>
-                           <button type="button" class="btn btn-primary btn-sm mx-2" id="save_pass_btn">Save
-                              Password</button>
-                        </div>
-                     </div>
-                  </form>
-               </div>
-            </div>
-         </div>
-      </div>
    </section>
 
    <!-- end product section -->
@@ -812,182 +560,6 @@
 
 </html>
 <script>
-
-
-
-   $('#forget_pass').on('click', function () {
-      $(this).hide();
-      $('.sign-in-htm').replaceWith(`<div class="sign-in-htm"><form><div class="group"><label for="login_username" class="label"></label><input placeholder="Username" id="forget_username" type="text" class="input"></div><div class="group"><button type="button" class="button" id="forget_in_btn"  />Submit</div></form></div>`);
-
-      $('#forget_in_btn').on('click', function () {
-         forget_username = $('#forget_username').val();
-         if (forget_username) {
-            data = {
-               'forget_username': forget_username,
-               'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
-            }
-            $.ajax({
-               type: 'POST',
-               url: "{% url 'shophome' %}",
-               data: data,
-               success: function (data) {
-                  if (data.success == 'Username matched') {
-                     // toastr.success(data.success);
-                     // $('.toast').css('background-color', '#51a351');
-                     $('#forget_username').attr('disabled', true);
-                     $('#forget_in_btn').hide();
-                     $('.sign-in-htm').append('<div class="group"><label for="pass1" class="label"></label><input id="pass1" placeholder="New Password" type="text" class="input"></div><div class="group"><label for="pass2" class="label"></label><input placeholder="Confirm Password" id="pass2" type="text" class="input"></div><div class="group"><button type="button" class="button" id="save_pass">Save Password</button></div>');
-                     $('#save_pass').on('click', function () {
-                        forget_username = $('#forget_username').val();
-                        pass1 = $('#pass1').val();
-                        pass2 = $('#pass2').val();
-                        if (pass1 | pass2) {
-                           if (pass1 == pass2) {
-                              data = {
-                                 'forget_username': forget_username,
-                                 'pass1': pass1,
-                                 'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
-                              }
-                              $.ajax({
-                                 type: 'POST',
-                                 url: "{% url 'shophome' %}",
-                                 data: data,
-                                 success: function (data) {
-                                    if (data.success == 'Password saved successfully.'){
-                                       toastr.success(data.success);
-                                       $('.toast').css('background-color', '#51a351');
-                                       setTimeout(reload, 1000);
-                                    }
-                                    else {
-                                       toastr.error('Please try again.');
-                                       $('.toast').css('background-color', '#bd362f');
-                                    }
-                                 }
-                              })
-                           }
-                           else {
-                              toastr.error('Password not matched.');
-                              $('.toast').css('background-color', '#bd362f');
-                           }
-                        }
-                        else {
-                           toastr.error('Please enter password.');
-                           $('.toast').css('background-color', '#bd362f');
-                        }
-                     });
-                  }
-                  else {
-                     toastr.error(data.error);
-                     $('.toast').css('background-color', '#bd362f');
-                  }
-               }
-            })
-         }
-         else {
-            toastr.error('Please enter username.');
-            $('.toast').css('background-color', '#bd362f');
-         }
-      })
-   });
-
-
-
-   $('#change_profile_btn').on('click', function () {
-      $('#change_fname').attr('disabled', false);
-      $('#change_lname').attr('disabled', false);
-      $('#change_email').attr('disabled', false);
-      $('#change_profile_image').attr('disabled', false);
-      $(this).replaceWith('<button type="button" class="btn btn-primary btn-sm mx-2" id="save_profile_btn">Save Changes</button>');
-   });
-
-   $(document).on('click', '#save_pass_btn', function () {
-      password = $('#change_password').val();
-      c_password = $('#change_c_password').val();
-      id = $('#hiiden_id').val();
-      if (password != c_password) {
-         toastr.error('Password not matched!');
-         $('.toast').css('background-color', '#bd362f');
-      }
-      else {
-         data = {
-            'password': password,
-            'c_password': c_password,
-            'id': id,
-            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
-         }
-         $.ajax({
-            type: 'POST',
-            url: "{% url 'shophome' %}",
-            data: data,
-            success: function (data) {
-               if (data.success == 'Changes Saved') {
-                  toastr.success(data.success);
-                  $('.toast').css('background-color', '#51a351');
-                  setTimeout(reload, 1000);
-               }
-               else {
-                  toastr.error('Please try again!');
-                  $('.toast').css('background-color', '#bd362f');
-               }
-            }
-         })
-      }
-   })
-
-
-   $(document).on('click', '#save_profile_btn', function () {
-      fname = $('#change_fname').val();
-      lname = $('#change_lname').val();
-      email = $('#change_email').val();
-      id = $('#user_id').val();
-      image = $('#change_profile_image')[0].files;
-      image_data = '';
-      if (image.length == '') {
-         image_data = null;
-      }
-      else {
-
-         image_data = image[0]['name'];
-      }
-      if (fname != '{{user.first_name}}' | lname != '{{user.last_name}}' | email != '{{user.email}}' | image_data != null) {
-         var data = new FormData($('#user-pofile-form').get(0));
-         data.append('fname', fname);
-         data.append('lname', lname);
-         data.append('email', email);
-         data.append('id', id);
-         data.append('image', image_data);
-         data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
-         $.ajax({
-            type: 'POST',
-            url: "{% url 'shophome' %}",
-            data: data,
-            cache: false,
-            processData: false,
-            contentType: false,
-            success: function (data) {
-               if (data.success == 'Changes saved') {
-                  toastr.success(data.success);
-                  $('.toast').css('background-color', '#51a351');
-                  setTimeout(reload, 1000);
-               }
-               else {
-                  toastr.error("Please try again!");
-                  $('.toast').css('background-color', '#bd362f');
-               }
-
-            }
-         })
-      }
-      else {
-         toastr.info('Please do some changes in your profile!');
-         $('.toast').css('background-color', '#2f96b4');
-      }
-
-   })
-   $('#change_pass_btn').on('click', function () {
-      $('#change_password').attr('disabled', false);
-      $('#change_c_password').attr('disabled', false);
-   })
    $('.no_cart').on('click', function () {
       toastr.info('Please sign in to your account for use cart!')
       $('.toast').css('background-color', '#2f96b4');
@@ -1005,10 +577,6 @@
          $('.toast').css('background-color', '#2f96b4');
       }
    });
-
-   function reload() {
-      window.location = '/';
-   }
 
    $('.cart').on('click', function () {
       let self = $(this);
@@ -1037,95 +605,4 @@
          }
       })
    })
-
-   $('#sign_up_btn').on('click', function () {
-      event.preventDefault();
-      fname = $('#fname').val();
-      lname = $('#lname').val();
-      email = $('#sign_up_email').val();
-      username = $('#sign_up_username').val();
-      password = $('#sign_up_password').val();
-      c_password = $('#c_password').val();
-      data = {
-         'fname': fname,
-         'lname': lname,
-         'email': email,
-         'username': username,
-         'password': password,
-         'c_password': c_password,
-         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
-      }
-      $.ajax({
-         type: 'POST',
-         url: "{% url 'sign_up' %}",
-         data: data,
-         success: function (data) {
-            if (data.error == 'Please fill these all details!') {
-               toastr.error(data.error);
-               $('.toast').css('background-color', '#bd362f');
-            }
-            else if (data.error == 'Password not matched!') {
-               toastr.error(data.error);
-               $('.toast').css('background-color', '#bd362f');
-            }
-            else if (data.error == 'Entered username already exists. Please try different username!') {
-               toastr.error(data.error);
-               $('.toast').css('background-color', '#bd362f');
-            }
-            else if (data.success == 'Your account successfully created!') {
-               toastr.success(data.success);
-               $('.toast').css('background-color', '#51a351');
-               setTimeout(reload, 1000);
-            }
-         }
-      })
-   })
-
-
-   $('#sign_in_btn').on('click', function () {
-      event.preventDefault();
-      username = $('#login_username').val();
-      password = $('#login_password').val();
-      data = {
-         'username': username,
-         'password': password,
-         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
-      }
-      $.ajax({
-         type: 'POST',
-         url: "{% url 'sign_in' %}",
-         data: data,
-         success: function (data) {
-            if (data.error == 'Please enter correct username or password!') {
-               toastr.error(data.error);
-               $('.toast').css('background-color', '#bd362f');
-            }
-            else if (data.error == 'Please enter username and password!') {
-               toastr.error(data.error);
-               $('.toast').css('background-color', '#bd362f');
-            }
-            else if (data.success == 'Sign in successfully!') {
-               toastr.success(data.success);
-               $('.toast').css('background-color', '#51a351');
-               setTimeout(reload, 1000);
-            }
-         }
-      })
-   })
-
-   $('#logout').on('click', function () {
-      data = {
-         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
-      }
-      $.ajax({
-         url: "{% url 'logout' %}",
-         type: 'POST',
-         data: data,
-         success: function (data) {
-            toastr.success(data.success);
-            $('.toast').css('background-color', '#51a351');
-            setTimeout(reload, 1000);
-         }
-      })
-   });
 </script>

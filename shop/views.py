@@ -391,24 +391,19 @@ def productview(request, id, name):
     if order_update:
         if order_update.payment_status == False:
             order_update.delete()
-    prod = Product.objects.filter(id=id)
+    try:
+        prod = Product.objects.get(id=id)
+    except Exception as e:
+        pass
     prods = Product.objects.all()
-    desc = prod[0].description
     cart_items = Cart.objects.values_list('product__name', flat=True)
     cart_items_list = [cart_items for cart_items in cart_items]
     len_cart = len(cart_items)
-    if ". " in desc:
-            for index, char in enumerate(desc):
-                if (desc[index] == "." and desc[index + 1] == " "):
-                    desc = desc.split(". ")
-                    break
-    else:
-        desc = [desc]
     if request.user.is_authenticated:  
-        return render(request, 'shop/productview.html', {'product': prod[0], 'desc': desc, 'prods': prods, 'len_cart': len_cart, 'cart_items_list': cart_items_list})
+        return render(request, 'shop/productview.html', {'product': prod, 'len_cart': len_cart, 'cart_items_list': cart_items_list})
     else:
         len_cart = 0
-        return render(request, 'shop/productview.html', {'product': prod[0], 'desc': desc, 'prods': prods, 'len_cart': len_cart})
+        return render(request, 'shop/productview.html', {'product': prod, 'len_cart': len_cart})
 
 
 def cart(request):
@@ -638,7 +633,6 @@ def checkout_done(request):
             amount = temp_amtt.temp_amt
         prod_id = []
         for item in cart_items:
-            print(item, '==========+++++==========')
             prod_id.append(item.id)
         name = request.POST.get('name')
         email = request.POST.get('email')
@@ -752,36 +746,21 @@ def sign_up(request):
         username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password')
-        c_password = request.POST.get('c_password')
-        if fname and lname and email and username and password and c_password:
-            # try:
-            #     user = User.objects.get(username = username)
-            # if user:
-            #     response = {
-            #         'error': 'Entered username already exists. Please try different username!'
-            #     }
-            #     return JsonResponse(response)
-            # else:
-            if password == c_password:
-                new_user = Extra_fields.objects.create_user(username, email, password)
-                new_user.first_name = fname
-                new_user.last_name = lname
-                new_user.image = default_image.objects.all().first().image
-                new_user.save()
-                response = {
-                    'success': 'Your account successfully created!'
-                }
-                return JsonResponse(response)
-            else:
-                response = {
-                    'error': 'Password not matched!'
-                }
-                return JsonResponse(response)
-            # except Exception as e:
-            #     pass
-        else:
+        print(fname, lname, email, username, password , ';kkjjhgjhhgf')
+        try:
+            user = Extra_fields.objects.get(username = username)
             response = {
-                'error': 'Please fill these all details!'
+                    'error': 'Entered username already exists. Please try different username!'
+            }
+            return JsonResponse(response)
+        except Exception as e:
+            new_user = Extra_fields.objects.create_user(username, email, password)
+            new_user.first_name = fname
+            new_user.last_name = lname
+            new_user.image = default_image.objects.all().first().image
+            new_user.save()
+            response = {
+                'success': 'Your account successfully created!'
             }
             return JsonResponse(response)
     return render(request, 'shop/error.html')
@@ -820,3 +799,10 @@ def logOut(request):
         }
         return JsonResponse(response)
     return render(request, 'shop/error.html')
+
+
+def profile(request):
+    return render(request, 'shop/profile.html')
+
+def account(request):
+    return render(request, 'shop/account.html')
