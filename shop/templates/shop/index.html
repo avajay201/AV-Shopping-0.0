@@ -292,6 +292,7 @@
    #user_image_btn {
       margin-left: 10px;
       background-color: #2b2a29;
+      cursor: pointer;
    }
 
    .btn-close {
@@ -346,8 +347,8 @@
                         {% if user.is_authenticated %}
                         <!-- <li class="username">Welcome {{user.username}}</li>
                         <li><button class="logout btn btn-outline-danger" type="button">Logout</button></li> -->
-                        <button id="user_image_btn" data-bs-toggle="modal" data-bs-target="#user_profile"><img
-                              id="user_image" src="{{user.image.url}}" /></button>
+                        <a id="user_image_btn" href="profile"><img
+                              id="user_image" src="{{user.image.url}}" /></a>
                         {% else %}
                         <li class="login_signup">
                            <a type="button" class="btn my_profile" href="account">

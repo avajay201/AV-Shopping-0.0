@@ -426,7 +426,7 @@ transform: translate3d(0, 0, 0);
         else{
             toastr.error('Please enter all details!')
         }
-    })
+    });
 
 
     $('#sign_in_btn').on('click', function () {
@@ -459,22 +459,5 @@ transform: translate3d(0, 0, 0);
             }
         })
     })
-
-
-    $('#logout').on('click', function () {
-        data = {
-            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
-        }
-        $.ajax({
-            url: "{% url 'logout' %}",
-            type: 'POST',
-            data: data,
-            success: function (data) {
-                toastr.success(data.success);
-                $('.toast').css('background-color', '#51a351');
-                setTimeout(reload, 1000);
-            }
-        })
-    });
 </script>
 {% endblock js %}

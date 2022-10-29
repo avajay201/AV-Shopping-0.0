@@ -1,13 +1,29 @@
 {% extends 'shop/basic.html' %}
 
 {% block style %}
+.font-weight-bold{
+margin-top: 15px;
+}
+
+.pass{
+padding: 0px 200px;
+}
+
+.pass123{
+padding: 0px 175px;
+}
+
+.labels{
+font-weight: bold;
+}
 {% endblock style %}
 
 {% block body %}
 <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
         <div class="col-md-3 border-right">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="{{user.image.url}}"><span class="font-weight-bold">{{user.username}}</span></div>
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5"
+                    width="150px" src="{{user.image.url}}"><span class="font-weight-bold">{{user.username}}</span></div>
         </div>
         <div class="col-md-9 border-right">
             <div class="p-3 py-5">
@@ -15,23 +31,111 @@
                     <h4 class="text-right">Profile Settings</h4>
                 </div>
                 <div class="row mt-2">
-                    <div class="col-md-6"><label class="labels">First Name</label><input id="edit_fname" type="text" class="form-control" value="{{user.first_name}}"></div>
-                    <div class="col-md-6"><label class="labels">Last Name</label><input  id="edit_lname" type="text" class="form-control" value="{{user.last_name}}"></div>
+                    <p class="user_id" data-id="{{user.id}}" hidden></p>
+                    <div class="col-md-6"><label class="labels">First Name</label><input id="fname" type="text"
+                            class="form-control" value="{{user.first_name}}"></div>
+                    <div class="col-md-6"><label class="labels">Last Name</label><input id="lname" type="text"
+                            class="form-control" value="{{user.last_name}}"></div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">Email</label><input id="edit_email"  type="text" class="form-control" value="{{user.email}}"></div>
-                    <div class="col-md-12"><label class="labels">Mobile Number</label><input id="edit_phone"  type="text" class="form-control" value="{{user.phone}}"></div>
-                    <div class="col-md-12"><label class="labels">Address Line 1</label><input id="edit_addrs1"  type="text" class="form-control" value="{{user.address_line1}}"></div>
-                    <div class="col-md-12"><label class="labels">Address Line 2</label><input id="edit_addrs2"  type="text" class="form-control" value="{{user.address_line2}}"></div>
-                    <div class="col-md-12"><label class="labels">Pin Code</label><input id="edit_pin_code"  type="text" class="form-control" value="{{user.pin_code}}"></div>
-                    <div class="col-md-12"><label class="labels">City</label><input id="edit_city"  type="text" class="form-control" value="{{user.city}}"></div>
-                    <div class="col-md-12"><label class="labels">State</label><input id="edit_state"  type="text" class="form-control" value="{{user.state}}"></div>
+                    <div class="col-md-12"><label class="labels">Email</label><input id="email" type="text"
+                            class="form-control" value="{{user.email}}"></div>
+                    <div class="col-md-12"><label class="labels">Mobile Number</label><input id="phone" type="text"
+                            class="form-control" value="{{user.phone}}"></div>
+                    <div class="col-md-12"><label class="labels">Address Line 1</label><input id="addrs_l1" type="text"
+                            class="form-control" value="{{user.addrs_l1}}"></div>
+                    <div class="col-md-12"><label class="labels">Address Line 2</label><input id="addrs_l2" type="text"
+                            class="form-control" value="{{user.addrs_l2}}"></div>
+                    <div class="col-md-12"><label class="labels">Pin Code</label><input id="pin_code" type="text"
+                            class="form-control" value="{{user.pin_code}}"></div>
+                    <div class="col-md-12"><label class="labels">City</label><input id="city" type="text"
+                            class="form-control" value="{{user.city}}"></div>
+                    <div class="col-md-12"><label class="labels">State</label><input id="state" type="text"
+                            class="form-control" value="{{user.state}}"></div>
+                    <div class="col-md-12 pass"><label class="labels pass123">Password</label><input id="password"
+                            type="password" class="form-control" value=""></div>
                 </div>
-                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div>
+                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save
+                        Profile</button></div>
             </div>
         </div>
     </div>
+    <form>
+        {% csrf_token %}
+    </form>
 </div>
 </div>
 </div>
+{% endblock %}
+{% block js %}
+<script>
+    $('.profile-button').on('click', function () {
+        fname = $('#fname').val()
+        lname = $('#lname').val()
+        email = $('#email').val()
+        phone = $('#phone').val()
+        addrs_l1 = $('#addrs_l1').val()
+        addrs_l2 = $('#addrs_l2').val()
+        pin_code = $('#pin_code').val()
+        city = $('#city').val()
+        state = $('#state').val()
+        password = $('#password').val()
+        user_id = $('.user_id').attr('data-id')
+        data = {
+            'user_id': user_id,
+            'fname': fname,
+            'lname': lname,
+            'email': email,
+            'phone': phone,
+            'addrs_l1': addrs_l1,
+            'addrs_l2': addrs_l2,
+            'pin_code': pin_code,
+            'city': city,
+            'state': state,
+            'password': password,
+            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+        }
+        if (fname != '' & lname != '' & email != '' & phone != '' & addrs_l1 != '' & addrs_l2 != '' & pin_code != '' & city != '' & state != '' & password != '') {
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'profile' %}",
+                data: data,
+                success: function (data) {
+                    if (data.error == 'Please enter correct password!') {
+                        toastr.error(data.error);
+                        // $('.toast').css('background-color', '#bd362f');
+                    }
+                    else if (data.success == 'Profile changes saved!') {
+                        $('#password').val('')
+                        toastr.success(data.success);
+                        // $('.toast').css('background-color', '#51a351');
+                        // setTimeout(reload, 1000);
+                    }
+                    else{
+                        toastr.error('Please try again!')
+                    }
+                }
+            })
+        }
+        else{
+            toastr.error('Please enter all details!')
+        }
+    });
+
+    $('#logout').on('click', function () {
+        data = {
+            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+        }
+        $.ajax({
+            url: "{% url 'logout' %}",
+            type: 'POST',
+            data: data,
+            success: function (data) {
+                toastr.success(data.success);
+                $('.toast').css('background-color', '#51a351');
+                setTimeout(reload, 1000);
+            }
+        })
+    });
+</script>
 {% endblock %}

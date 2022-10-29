@@ -1,3 +1,4 @@
+from email.policy import default
 from pyexpat import model
 from statistics import multimode
 from django.db import models
@@ -8,6 +9,12 @@ from sqlalchemy import true
 
 class Extra_fields(AbstractUser):
     image = models.ImageField(upload_to='shop/images/', default='')
+    phone = models.CharField(max_length=13, default='')
+    addrs_l1 = models.CharField(max_length=500, default='')
+    addrs_l2 = models.CharField(max_length=500, default='')
+    pin_code = models.CharField(max_length=6, default='')
+    city = models.CharField(max_length=50, default='')
+    state = models.CharField(max_length=30, default='')
 
 class default_image(models.Model):
     image = models.ImageField(upload_to = 'shop/images')

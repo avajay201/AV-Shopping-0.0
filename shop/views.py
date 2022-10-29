@@ -11,6 +11,7 @@ from django.template.loader import render_to_string
 from django.db.models import Q
 from django.core.mail import send_mail
 from django.forms.models import model_to_dict
+from django.contrib.auth.hashers import check_password
 # authorize razorpay client with API Keys.
 razorpay_client = razorpay.Client(
     auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
@@ -93,11 +94,6 @@ def index(request):
     if request.method == 'POST':
         category = request.POST.get('cat_value')
         product_id = request.POST.get('product_id')
-        fname = request.POST.get('fname')
-        lname = request.POST.get('lname')
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        c_password = request.POST.get('c_password')
         id = request.POST.get('id')
         forget_username = request.POST.get('forget_username')
         pass1 = request.POST.get('pass1')
@@ -159,22 +155,6 @@ def index(request):
                     return JsonResponse(response)
             except Exception as e:
                 pass
-        elif fname and lname and email:
-            try:
-                image = request.FILES['image']
-            except Exception as e:
-                dflt_image = default_image.objects.all()
-                image = dflt_image[0].image
-            new_user = Extra_fields.objects.get(id = id)
-            new_user.first_name = fname
-            new_user.last_name = lname
-            new_user.email = email
-            new_user.image = image
-            new_user.save()
-            response = {
-                'success': 'Changes saved'
-            }
-            return JsonResponse(response)
         elif password and c_password and id:
             new_user = Extra_fields.objects.get(id = id)
             new_user.set_password(password)
@@ -802,7 +782,53 @@ def logOut(request):
 
 
 def profile(request):
+    if request.method == 'POST':
+        user_id = request.POST.get('user_id')
+        fname = request.POST.get('fname')
+        lname = request.POST.get('lname')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        addrs_l1 = request.POST.get('addrs_l1')
+        addrss_l2 = request.POST.get('addrss_l2')
+        pin_code = request.POST.get('pin_code')
+        city = request.POST.get('city')
+        state = request.POST.get('state')
+        password = request.POST.get('password')
+        # try:
+        #     image = request.FILES['image']
+        # except Exception as e:
+            # dflt_image = default_image.objects.all()
+            # image = dflt_image[0].image
+        try:
+            user = Extra_fields.objects.get(id = user_id)
+
+            if check_password(password, user.password):
+                print('matched')
+                user.first_name = fname
+                user.last_name = lname
+                user.email = email
+                user.phone = phone
+                user.addrs_l1 = addrs_l1
+                user.addrss_l2 = addrss_l2
+                user.pin_code = pin_code
+                user.city = city
+                user.state = state
+                # new_user.image = image
+                user.save()
+                response = {
+                    'success': 'Profile changes saved!'
+                }
+                return JsonResponse(response)
+            else:
+                print('not matched')
+                response = {
+                    'error': 'Please enter correct password!'
+                }
+                return JsonResponse(response)
+        except Exception as e:
+            pass
     return render(request, 'shop/profile.html')
 
 def account(request):
+
     return render(request, 'shop/account.html')
