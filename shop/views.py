@@ -92,48 +92,21 @@ def all_products(request):
 
 def index(request):
     if request.method == 'POST':
-        category = request.POST.get('cat_value')
+        category = request.POST.get('crnt_cat_value')
+        print('category>>>>>>>>>>>>>', category)
         product_id = request.POST.get('product_id')
-        id = request.POST.get('id')
-        forget_username = request.POST.get('forget_username')
-        pass1 = request.POST.get('pass1')
+        # id = request.POST.get('id')
+        # forget_username = request.POST.get('forget_username')
+        # pass1 = request.POST.get('pass1')
         if category:
-            if category == 'All Category':
-                pass
-            else:
-                if request.user.is_authenticated:
-                    allprods = Product.objects.filter(sub_category=category)
-                    cart_items = Cart.objects.values_list(
-                        'product__name', flat=True)
-                    cart_items_list = [cart_items for cart_items in cart_items]
-                    len_cart = len(cart_items_list)
-                    allprods1 = Product.objects.all()
-                    all_cats = {''}
-                    for item in allprods1:
-                        all_cats.add(item.sub_category)
-                    all_cats.remove('')
-                    all_cats = list(all_cats)
-                    all_cats.remove(category)
-                    all_cats.append('All Category')
-                    params = {'allprods': allprods, 'all_cats': all_cats, 'category': category,
-                              'len_cart': len_cart, 'cart_items_list': cart_items_list}
-                    return render(request, 'shop/index.html', params)
-                else:
-                    allprods = Product.objects.filter(sub_category=category)
-                    cart_items = Cart.objects.values_list(
-                        'product__name', flat=True)
-                    len_cart = 0
-                    allprods1 = Product.objects.all()
-                    all_cats = {''}
-                    for item in allprods1:
-                        all_cats.add(item.sub_category)
-                    all_cats.remove('')
-                    all_cats = list(all_cats)
-                    all_cats.remove(category)
-                    all_cats.append('All Category')
-                    params = {'allprods': allprods, 'all_cats': all_cats, 'category': category,
-                              'len_cart': len_cart}
-                    return render(request, 'shop/index.html', params)
+            all_cats = set()
+            all_prod_cats = Product.objects.all()
+            for item in all_prod_cats:
+                all_cats.add(item.sub_category)
+            all_cats = list(all_cats)
+            allprods = Product.objects.filter(sub_category=all_cats[all_cats.index(category)])
+            params = {'allprods': allprods, 'category': category, 'all_cats': all_cats}
+            return render(request, 'shop/index.html', params)
         elif product_id:
             try:
                 product_obj = Product.objects.get(id=product_id)
@@ -155,40 +128,42 @@ def index(request):
                     return JsonResponse(response)
             except Exception as e:
                 pass
-        elif password and c_password and id:
-            new_user = Extra_fields.objects.get(id = id)
-            new_user.set_password(password)
-            new_user.save()
-            response = {
-                'success': 'Changes Saved'
-            }
-            return JsonResponse(response)
-        elif forget_username and pass1:
-            try:
-                user = Extra_fields.objects.get(username = forget_username)
-                user.set_password(pass1)
-                user.save()
-                response = {
-                    'success': 'Password saved successfully.'
-                }
-                return JsonResponse(response)
-            except Exception as e:
-                response = {
-                    'error': 'Please try agian.'
-                }
-                return JsonResponse(response)
-        elif forget_username:
-            try:
-                user = Extra_fields.objects.get(username = forget_username)
-                response = {
-                    'success': 'Username matched'
-                }
-                return JsonResponse(response)
-            except Exception as e:
-                response = {
-                    'error': 'Username does not exists, please enter correct username.'
-                }
-                return JsonResponse(response)
+        # elif password and c_password and id:
+        #     new_user = Extra_fields.objects.get(id = id)
+        #     new_user.set_password(password)
+        #     new_user.save()
+        #     response = {
+        #         'success': 'Changes Saved'
+        #     }
+        #     return JsonResponse(response)
+        # elif forget_username and pass1:
+        #     try:
+        #         user = Extra_fields.objects.get(username = forget_username)
+        #         user.set_password(pass1)
+        #         user.save()
+        #         response = {
+        #             'success': 'Password saved successfully.'
+        #         }
+        #         return JsonResponse(response)
+        #     except Exception as e:
+        #         response = {
+        #             'error': 'Please try agian.'
+        #         }
+        #         return JsonResponse(response)
+        # elif forget_username:
+        #     try:
+        #         user = Extra_fields.objects.get(username = forget_username)
+        #         response = {
+        #             'success': 'Username matched'
+        #         }
+        #         return JsonResponse(response)
+        #     except Exception as e:
+        #         response = {
+        #             'error': 'Username does not exists, please enter correct username.'
+        #         }
+        #         return JsonResponse(response)
+        else:
+            return redirect('/')
     if request.user.is_authenticated:
         temp_amtt = TempAmount.objects.all().last()
         temp_amtt.temp_amt = 0
@@ -211,7 +186,7 @@ def index(request):
         cart_items_list = [cart_items for cart_items in cart_items]
         len_cart = len(cart_items)
         params = {'allprods': allprods, 'all_cats': all_cats,
-                  'len_cart': len_cart, 'cart_items_list': cart_items_list}
+                  'len_cart': len_cart, 'cart_items_list': cart_items_list, 'category': None}
         return render(request, 'shop/index.html', params)
     allprods = Product.objects.all()
     all_cats = {''}
@@ -221,7 +196,7 @@ def index(request):
     all_cats = list(all_cats)
     len_cart = 0
     params = {'allprods': allprods, 'all_cats': all_cats,
-              'len_cart': len_cart}
+              'len_cart': len_cart, 'category': None}
     return render(request, 'shop/index.html', params)
 
 
@@ -359,7 +334,7 @@ def my_orders(request):
     return render(request, 'shop/my_orders.html', {'orders': orders})
 
 
-def productview(request, id, name):
+def productview(request, id):
     temp_amtt = TempAmount.objects.all().last()
     temp_amtt.temp_amt = 0
     temp_amtt.save()

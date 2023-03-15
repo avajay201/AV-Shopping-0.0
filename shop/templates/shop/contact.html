@@ -106,7 +106,7 @@
     function reload() {
         window.location = '/contact';
     }
-    $('#send_btn').on('click', function (e) {
+    $(document).on('click', '#send_btn', function (e) {
         name = $('#name').val();
         email = $('#email').val();
         subject = $('#subject').val();
@@ -123,6 +123,8 @@
                     'message': message,
                     'csrfmiddlewaretoken': "{{ csrf_token }}"
                 }
+                $(this).attr('id', 'none');
+                $(this).attr("disabled","disabled").css("cursor", "default").fadeTo(500,0.2)
                 $.ajax({
                     type: 'POST',
                     url: 'contact',

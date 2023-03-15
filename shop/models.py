@@ -4,7 +4,6 @@ from statistics import multimode
 from django.db import models
 import datetime
 from django.contrib.auth.models import AbstractUser
-from sqlalchemy import true
 # Create your models here.
 
 class Extra_fields(AbstractUser):
