@@ -130,8 +130,8 @@ MEDIA_URL = 'media/'
 MEDIAFILES_DIRS = [os.path.join(BASE_DIR,'shop/media'),]
 
 # Payment
-RAZOR_KEY_ID = 'rzp_test_rfyYk1RsPUbV5E'
-RAZOR_KEY_SECRET = 'g5T5HiymvJVrLwRG9akl9Ok5'
+RAZOR_KEY_ID = 'rzp_test_K0E7E6Cos2g4U4'
+RAZOR_KEY_SECRET = 'ZUpKZjPLZ4S3l3Dvn3AqbhKI'
 
 # Send email
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

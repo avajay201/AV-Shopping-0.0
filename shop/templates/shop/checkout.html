@@ -153,6 +153,9 @@
       $('.toast').css('background-color', '#bd362f');
     }
     else {
+      $(this).replaceWith(`<div class="spinner-border text-info" style="margin-left: 550px;" role="status">
+        <span class="visually-hidden"></span>
+      </div>`)
       $('#hidden_btn').click();
     }
   };
